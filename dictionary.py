@@ -1,4 +1,5 @@
 import hashlib
+from linked_list import LinkedList
 
 
 class Dictionary:
@@ -7,74 +8,117 @@ class Dictionary:
 
     def set(self, key, value):
         '''
-
-        :param key:
-        :param value:
-        :return:
+        Adds an item to the dictionary
+        :param key: key
+        :param value: value
         '''
 
-        self.data[key] = [value]
+        item = (key, value)
+        index = self.get_index(key)
+
+        if self.data[index] is None:
+            self.data[index] = item
+
+        elif isinstance(self.data[index], tuple):
+            currentval = self.data[index]
+            newlist = LinkedList()
+
+            newlist.insert_front(currentval)
+            newlist.insert_front(item)
+
+            self.data[index] = newlist
+
+        else:
+            self.data[index].insert_front(item)
 
     def get(self, key):
         '''
+        Gets a value associated with the key.
+        :param key: key
+        :return: The value of the item located at with the key.
+        '''
 
+        index = self.get_index(key)
+
+        if self.data[index] is None:
+            return None
+
+        if isinstance(self.data[index], tuple):
+            item = self.data[index]
+            if item[0] == key:
+                return item[1]
+            else:
+                return None
+
+        elif isinstance(self.data[index], LinkedList):
+            ll = self.data[index]
+            for i in ll:
+                if i.value[0] == key:
+                    return i.value[1]
+
+            return None
+
+    def remove(self, key):
+        '''
         :param key:
         :return:
         '''
+        index = self.get_index(key)
 
-        return self.data[key]
+        if self.data[index] is None:
+            return None
 
-    def contains(self, key):
-        '''
+        elif isinstance(self.data[index], tuple):
+            self.data[index] = None
 
-        :param key:
-        :return: bool
-        '''
+        elif isinstance(self.data[index], LinkedList):
+            ll = self.data[index]
+            for i in ll:
+                if i.value[0] == key:
+                    ll.delete_by_value(i.value)
+                else:
+                    continue
 
-    def get_index(key):
+    # def contains(self, key):
+    #     '''
+    #
+    #     :param key:
+    #     :return: bool
+    #     '''
+
+    def get_index(self, key):
         '''
         
         :return: index
         '''
+        index = hash(key) % 10
+
+        return abs(index)
 
     def __init__(self):
-        self.data = dict()
+        self.data = [None] * 10
 
-    def __del__(self, key):
-        '''
-
-        :param key:
-        :return:
-        '''
+    def __repr__(self):
+        return f"Dictionary object with {len(self)} entries."
 
     def __len__(self):
         '''
-
-        :return:
+        get the length of your dictionary
+        :return: int: Total number of items in the Dictionary
         '''
 
-    def __repr__(self):
-        '''
+        count = 0
 
-        :return:
-        '''
+        for i in self.data:
 
+            if i is None:
+                continue
 
-  #   Hash - maps a string to a number
-  #   same string = same number
-  #     secure hash function
-  #
-  # Secure Hash Functions are ireversable
-  #
+            elif isinstance(i, tuple):
+                count += 1
 
+            elif isinstance(i, LinkedList):
+                numberofitems = len(i)
+                count += numberofitems
 
-
-
-
-print(hash("Hello"))
-print(hash("Hello"))
-
-
-
-
-# print(hash("hello"))
+        return count

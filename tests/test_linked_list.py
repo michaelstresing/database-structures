@@ -1,10 +1,10 @@
 import unittest
 
-from data_structures.linked_list import LinkedList
-from data_structures.exceptions.StackEmptyException import StackEmptyException
+from linked_list import LinkedList
+from exceptions.StackEmptyException import StackEmptyException
 
 
-class TestStack(unittest.TestCase):
+class TestLinkedList(unittest.TestCase):
 
     def test_insert_pop_correct_order(self):
 
@@ -109,3 +109,26 @@ class TestStack(unittest.TestCase):
         self.assertEqual(2, pop2, "Pop front is broken ")
         self.assertEqual(3, pop3, "Pop front is broken ")
 
+    def test_remove_works(self):
+
+        ll = LinkedList()
+        ll.insert_front(1)
+        ll.insert_front(2)
+        ll.insert_front(3)
+        ll.insert_front(4)
+        ll.insert_front(5)
+        ll.insert_front(6)
+
+        ll.delete_by_value(3)
+
+        pop1 = ll.pop_front()
+        pop2 = ll.pop_front()
+        pop3 = ll.pop_front()
+        pop4 = ll.pop_front()
+        pop5 = ll.pop_front()
+
+        self.assertEqual(1, pop5, "The item 3 wasn't deleted")
+        self.assertEqual(2, pop4, "The item 3 wasn't deleted")
+        self.assertEqual(4, pop3, "The item 3 wasn't deleted")
+        self.assertEqual(5, pop2, "The item 3 wasn't deleted")
+        self.assertEqual(6, pop1, "The item 3 wasn't deleted")
