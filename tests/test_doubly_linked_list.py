@@ -1,7 +1,7 @@
 import unittest
 
-from doubly_linked_list import DoublyLinkedList
-from exceptions.StackEmptyException import StackEmptyException
+from building_datastructures.doubly_linked_list import DoublyLinkedList
+from building_datastructures.exceptions.StackEmptyException import StackEmptyException
 
 
 class TestStack(unittest.TestCase):

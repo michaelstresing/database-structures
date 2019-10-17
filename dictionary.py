@@ -1,17 +1,34 @@
 import hashlib
-from linked_list import LinkedList
+from building_datastructures.linked_list import LinkedList
 
 
 class Dictionary:
 
-    # 0(1) compared to Linked Lists which are 0(n)
+    def __init__(self, size):
+        self.data = [None] * size
+        self.size = size
+
+    def __repr__(self):
+        return f"Dictionary object of {self.size} spaces, with {len(self)} entries."
+
+    def __len__(self):
+        count = 0
+        for i in self.data:
+            if i is None:
+                continue
+            elif isinstance(i, tuple):
+                count += 1
+            elif isinstance(i, LinkedList):
+                numberofitems = len(i)
+                count += numberofitems
+        return count
 
     def set(self, key, value):
-        '''
+        """
         Adds an item to the dictionary
         :param key: key
         :param value: value
-        '''
+        """
 
         item = (key, value)
         index = self.get_index(key)
@@ -32,11 +49,11 @@ class Dictionary:
             self.data[index].insert_front(item)
 
     def get(self, key):
-        '''
+        """
         Gets a value associated with the key.
         :param key: key
         :return: The value of the item located at with the key.
-        '''
+        """
 
         index = self.get_index(key)
 
@@ -59,10 +76,11 @@ class Dictionary:
             return None
 
     def remove(self, key):
-        '''
-        :param key:
-        :return:
-        '''
+        """
+        Remove a key, value pair based on the key
+        :param: key
+        """
+
         index = self.get_index(key)
 
         if self.data[index] is None:
@@ -79,46 +97,39 @@ class Dictionary:
                 else:
                     continue
 
-    # def contains(self, key):
-    #     '''
-    #
-    #     :param key:
-    #     :return: bool
-    #     '''
+    def contains(self, key):
+        """
+        Check if a dictionary contains something for a given key
+        :param: key
+        :return: True/False
+        """
+
+        index = self.get_index(key)
+
+        if self.data[index] is None:
+            return False
+
+        if isinstance(self.data[index], tuple):
+            item = self.data[index]
+            if item[0] == key:
+                return True
+            else:
+                return False
+
+        elif isinstance(self.data[index], LinkedList):
+            ll = self.data[index]
+            for i in ll:
+                if i.value[0] == key:
+                    return True
+
+            return False
 
     def get_index(self, key):
-        '''
-        
+        """
+        Hashes a key and returns an index
         :return: index
-        '''
+        """
+
         index = hash(key) % 10
 
         return abs(index)
-
-    def __init__(self):
-        self.data = [None] * 10
-
-    def __repr__(self):
-        return f"Dictionary object with {len(self)} entries."
-
-    def __len__(self):
-        '''
-        get the length of your dictionary
-        :return: int: Total number of items in the Dictionary
-        '''
-
-        count = 0
-
-        for i in self.data:
-
-            if i is None:
-                continue
-
-            elif isinstance(i, tuple):
-                count += 1
-
-            elif isinstance(i, LinkedList):
-                numberofitems = len(i)
-                count += numberofitems
-
-        return count

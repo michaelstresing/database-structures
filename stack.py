@@ -1,4 +1,4 @@
-from exceptions.StackEmptyException import StackEmptyException
+from building_datastructures.exceptions.StackEmptyException import StackEmptyException
 
 
 class Stack:
@@ -6,40 +6,6 @@ class Stack:
     def __init__(self):
         self._data = list()
 
-    def push(self, item):
-        """
-        0(1)
-        Adds an item to the Stack
-        :param item: The value of the item wished to be added to the stack.
-        :return: Nothing
-        """
-        self._data.append(item)
-
-    def pop(self):
-        """
-        0(n) - due to len (could use try/except block for 0(1) instead
-        Takes top item on stack off the stack.
-        :return: top list item in Stack
-        """
-        if len(self) < 1:
-            raise StackEmptyException("Can't pop an empty stack")
-        item = self._data[-1]
-        del self._data[-1]
-
-        return item
-
-    def peek(self):
-        """
-        0(n) - same as above
-        Takes the top item on the stack, without deleting it
-        :return: top list item in Stack
-        """
-        if len(self) < 1:
-            raise StackEmptyException("Can't peek an empty stack")
-        item = self._data[-1]
-
-        return item
-        
     def __len__(self):
         """
         0(n)
@@ -58,3 +24,44 @@ class Stack:
 
         newlist = self._data[::-1]
         self._data = newlist
+
+    def __iter__(self):
+        i = 0
+        current = self._data[i]
+        for i in self:
+            yield current
+            i += 1
+
+    def push(self, item):
+        """
+        0(1)
+        Adds an item to the Stack
+        :param item: The value of the item wished to be added to the stack.
+        :return: Nothing
+        """
+        self._data.append(item)
+
+    def pop(self):
+        """
+        0(n) - due to len (could use try/except block for 0(1) instead
+        Takes top item on stack off the stack.
+        :return: top list item in Stack
+        """
+        if len(self) == 0:
+            return None
+        item = self._data[-1]
+        del self._data[-1]
+
+        return item
+
+    def peek(self):
+        """
+        0(n) - same as above
+        Takes the top item on the stack, without deleting it
+        :return: top list item in Stack
+        """
+        if len(self) < 1:
+            raise StackEmptyException("Can't peek an empty stack")
+        item = self._data[-1]
+
+        return item
