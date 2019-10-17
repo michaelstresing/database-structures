@@ -1,4 +1,4 @@
-from data_structures.exceptions.StackEmptyException import StackEmptyException
+from exceptions.StackEmptyException import StackEmptyException
 
 
 class Node:

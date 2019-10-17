@@ -1,4 +1,4 @@
-from data_structures.exceptions.StackEmptyException import StackEmptyException
+from exceptions.StackEmptyException import StackEmptyException
 
 
 class AQueue:   # Named with A as class/file names Queue/queue.py caused some issues with the debugger.
