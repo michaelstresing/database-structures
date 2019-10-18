@@ -5,15 +5,15 @@ from building_datastructures.linked_list import LinkedList
 class Dictionary:
 
     def __init__(self, size):
-        self.data = [None] * size
-        self.size = size
+        self._data = [None] * size
+        self._size = size
 
     def __repr__(self):
-        return f"Dictionary object of {self.size} spaces, with {len(self)} entries."
+        return f"Dictionary object of {self._size} spaces, with {len(self)} entries."
 
     def __len__(self):
         count = 0
-        for i in self.data:
+        for i in self._data:
             if i is None:
                 continue
             elif isinstance(i, tuple):
@@ -28,25 +28,26 @@ class Dictionary:
         Adds an item to the dictionary
         :param key: key
         :param value: value
+        TODO: insert a check to run the expander
         """
 
         item = (key, value)
         index = self.get_index(key)
 
-        if self.data[index] is None:
-            self.data[index] = item
+        if self._data[index] is None:
+            self._data[index] = item
 
-        elif isinstance(self.data[index], tuple):
-            currentval = self.data[index]
+        elif isinstance(self._data[index], tuple):
+            currentval = self._data[index]
             newlist = LinkedList()
 
             newlist.insert_front(currentval)
             newlist.insert_front(item)
 
-            self.data[index] = newlist
+            self._data[index] = newlist
 
         else:
-            self.data[index].insert_front(item)
+            self._data[index].insert_front(item)
 
     def get(self, key):
         """
@@ -57,21 +58,21 @@ class Dictionary:
 
         index = self.get_index(key)
 
-        if self.data[index] is None:
+        if self._data[index] is None:
             return None
 
-        if isinstance(self.data[index], tuple):
-            item = self.data[index]
+        if isinstance(self._data[index], tuple):
+            item = self._data[index]
             if item[0] == key:
                 return item[1]
             else:
                 return None
 
-        elif isinstance(self.data[index], LinkedList):
-            ll = self.data[index]
+        elif isinstance(self._data[index], LinkedList):
+            ll = self._data[index]
             for i in ll:
-                if i.value[0] == key:
-                    return i.value[1]
+                if i[0] == key:
+                    return i[1]
 
             return None
 
@@ -83,17 +84,17 @@ class Dictionary:
 
         index = self.get_index(key)
 
-        if self.data[index] is None:
+        if self._data[index] is None:
             return None
 
-        elif isinstance(self.data[index], tuple):
-            self.data[index] = None
+        elif isinstance(self._data[index], tuple):
+            self._data[index] = None
 
-        elif isinstance(self.data[index], LinkedList):
-            ll = self.data[index]
+        elif isinstance(self._data[index], LinkedList):
+            ll = self._data[index]
             for i in ll:
-                if i.value[0] == key:
-                    ll.delete_by_value(i.value)
+                if i[0] == key:
+                    ll.delete_by_value(i)
                 else:
                     continue
 
@@ -106,18 +107,18 @@ class Dictionary:
 
         index = self.get_index(key)
 
-        if self.data[index] is None:
+        if self._data[index] is None:
             return False
 
-        if isinstance(self.data[index], tuple):
-            item = self.data[index]
+        if isinstance(self._data[index], tuple):
+            item = self._data[index]
             if item[0] == key:
                 return True
             else:
                 return False
 
-        elif isinstance(self.data[index], LinkedList):
-            ll = self.data[index]
+        elif isinstance(self._data[index], LinkedList):
+            ll = self._data[index]
             for i in ll:
                 if i.value[0] == key:
                     return True
@@ -129,7 +130,12 @@ class Dictionary:
         Hashes a key and returns an index
         :return: index
         """
-
-        index = hash(key) % 10
+        index = hash(key) % self._size
 
         return abs(index)
+
+    def expand(self):
+        """
+        Expands the length of the dictionary index array.
+        """
+        ...

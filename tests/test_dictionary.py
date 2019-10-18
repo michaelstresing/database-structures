@@ -102,4 +102,4 @@ class TestDict(unittest.TestCase):
         dic.set("Hello", "World")
         rep = str(dic)
 
-        self.assertEqual(f"Dictionary object of {dic.size} spaces, with 1 entries.", rep, "The representation is wrong")
+        self.assertEqual(f"Dictionary object of {dic._size} spaces, with 1 entries.", rep, "The representation is wrong")

@@ -1,16 +1,6 @@
 from building_datastructures.exceptions.StackEmptyException import StackEmptyException
 
 
-class Node:
-
-    def __init__(self, value=None, next=None):
-        self.value = value
-        self.next = next
-
-    def __repr__(self):
-        return f"Node({self.value})"
-
-
 class LinkedList:
 
     def __init__(self):
@@ -50,7 +40,7 @@ class LinkedList:
     def __iter__(self):
         current = self._head
         for i in range(len(self)):
-            yield current
+            yield current.value
             if current.next is not None:
                 current = current.next
 
@@ -96,17 +86,17 @@ class LinkedList:
         currentnode = priornode.next
         nextnode = currentnode.next
 
-        priornode.next = None
+        priornode._next = None
 
         while nextnode is not None:
-            currentnode.next = priornode
+            currentnode._next = priornode
 
             priornode = currentnode
             currentnode = nextnode
             nextnode = nextnode.next
 
         self._head = currentnode
-        currentnode.next = priornode
+        currentnode._next = priornode
 
     def delete_specific(self, item):
         '''
@@ -129,7 +119,7 @@ class LinkedList:
                 placenode = placenode.next
                 counter += 1
 
-            priordelete.next = postdelete
+            priordelete._next = postdelete
 
     def delete_by_value(self, val):
         """
@@ -152,3 +142,12 @@ class LinkedList:
             self._head = current.next
         else:
             previous.next = current.next
+
+class Node:
+
+    def __init__(self, value=None, next=None):
+        self.value = value
+        self.next = next
+
+    def __repr__(self):
+        return f"Node({self.value})"
