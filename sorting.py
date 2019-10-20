@@ -37,32 +37,54 @@ def quick_sort(list):
 
 def bubble_sort(list):
 
-    for index, value in enumerate(list):
-        ran = False
-        numsorted = 0
+    n = len(list)
 
-        if index <= len(list) - 1:
-            nextindex = index + 1
-        else:
+    for index in range(n):
+
+        for index2 in range(0, n - index - 1):
+
+            if list[index2] > list[index2 + 1]:
+                list[index2], list[index2 + 1] = list[index2 + 1], list[index2]
+
+    return list
+
+
+def bubble_sort_with_stop(list):
+
+    n = len(list)
+
+    for index in range(n):
+        sorted = True
+
+        for index2 in range(0, n - index - 1):
+
+            if list[index2] > list[index2 + 1]:
+                list[index2], list[index2 + 1] = list[index2 + 1], list[index2]
+                sorted = False
+
+        if sorted is True:
             return list
 
-        while value > list[nextindex]:
-            list[index], list[nextindex] = list[nextindex], list[index]
-            index += 1
-            numsorted += 1
-            ran = True
+    return list
 
-            if nextindex == len(list) - 1:
-                break
 
-        return list
+def insertion_sort(list):
 
-    def bubble_up(list):
+    for index in range(1, len(list)):
 
-        for i, v in enumerate(list):
-            nextv = list[v]
-            if v > nextv:
-                list[index], list[nextindex] = list[nextindex], list[index]
+        pointer = list[index]
+        priorindex = index - 1
+
+        while pointer < list[priorindex] and priorindex >= 0:
+            list[priorindex + 1] = list[priorindex]
+            priorindex -= 1
+        list[priorindex + 1] = pointer
+
+    return list
+
+
+
+
 
 
 
