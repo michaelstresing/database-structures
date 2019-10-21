@@ -1,7 +1,7 @@
 import unittest
 
-from building_datastructures.bqueue import BQueue
-from building_datastructures.exceptions.StackEmptyException import StackEmptyException
+from datastructures_and_algorithms.bqueue import BQueue
+from datastructures_and_algorithms.exceptions.StackEmptyException import StackEmptyException
 
 
 class TestStack(unittest.TestCase):

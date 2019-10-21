@@ -1,7 +1,7 @@
 import unittest
 
-from building_datastructures.linked_list import LinkedList
-from building_datastructures.exceptions.StackEmptyException import StackEmptyException
+from datastructures_and_algorithms.linked_list import LinkedList
+from datastructures_and_algorithms.exceptions.StackEmptyException import StackEmptyException
 
 
 class TestLinkedList(unittest.TestCase):

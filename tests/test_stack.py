@@ -1,7 +1,7 @@
 import unittest
 
-from building_datastructures.stack import Stack
-from building_datastructures.exceptions.StackEmptyException import StackEmptyException
+from datastructures_and_algorithms.stack import Stack
+from datastructures_and_algorithms.exceptions.StackEmptyException import StackEmptyException
 
 
 class TestStack(unittest.TestCase):

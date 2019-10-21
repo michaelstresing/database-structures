@@ -1,6 +1,6 @@
 import unittest
 import random
-from building_datastructures.sorting import quick_sort, bubble_sort, bubble_sort_with_stop, insertion_sort
+from datastructures_and_algorithms.sorting import quick_sort, bubble_sort, bubble_sort_with_stop, insertion_sort
 
 
 class TestSorts(unittest.TestCase):

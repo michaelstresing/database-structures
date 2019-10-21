@@ -1,4 +1,4 @@
-from building_datastructures.exceptions.StackEmptyException import StackEmptyException
+from datastructures_and_algorithms.exceptions.StackEmptyException import StackEmptyException
 
 
 class LinkedList:

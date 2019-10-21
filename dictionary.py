@@ -1,5 +1,5 @@
 import hashlib
-from building_datastructures.linked_list import LinkedList
+from datastructures_and_algorithms.linked_list import LinkedList
 
 
 class Dictionary:

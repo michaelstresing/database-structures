@@ -1,6 +1,6 @@
 import unittest
 
-from building_datastructures.dictionary import Dictionary
+from datastructures_and_algorithms.dictionary import Dictionary
 
 
 class TestDict(unittest.TestCase):
